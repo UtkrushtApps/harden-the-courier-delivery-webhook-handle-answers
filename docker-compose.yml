@@ -1,0 +1,14 @@
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: courier_db
+      POSTGRES_USER: courier_user
+      POSTGRES_PASSWORD: courier_pass
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U courier_user -d courier_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
